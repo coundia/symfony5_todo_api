@@ -6,6 +6,27 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         users_in_memory: { memory: null }
+#        backend_users:
+#            memory:
+#                users:
+#                    john_admin: { password: '$2y$13$jxGxc ... IuqDju', roles: [ 'ROLE_ADMIN' ] }
+#                    jane_admin: { password: '$2y$13$PFi1I ... rGwXCZ', roles: [ 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN' ] }
+
+        users:
+            entity:
+                # the class of the entity that represents users
+                class: 'App\Entity\User'
+                # the property to query by - e.g. email, username, etc
+                property: 'email'
+
+                # optional: if you're using multiple Doctrine entity
+                # managers, this option defines which one to use
+                #manager_name: 'customer'
+        custom_user_provider:
+            id: App\Security\UserProvider
+        all_users:
+            chain:
+                providers: [ 'users_in_memory', 'users' ]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

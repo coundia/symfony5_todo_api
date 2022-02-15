@@ -7,5 +7,7 @@ composer require maker --dev
     php .\bin\console make:entity
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate
+#composer require symfony/security-bundle
+    php bin/console make:user
 #run
 symfony serve
